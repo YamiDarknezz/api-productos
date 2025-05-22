@@ -1,0 +1,40 @@
+### Listar todos los productos (GET)
+GET https://5100.darkhub.lat/api/productos
+Accept: application/json
+
+### Obtener un producto por ID (GET)
+GET http://localhost:5100/api/productos/2
+Accept: application/json
+
+### Crear un nuevo producto (POST)
+POST http://localhost:5100/api/productos
+Content-Type: application/json
+
+{
+  "nombre": "Auriculares",
+  "descripcion": "Auriculares Bluetooth",
+  "precio": 120.0
+}
+
+### Crear un nuevo producto (POST)
+POST https://5100.darkhub.lat/api/productos
+Content-Type: application/json
+
+{
+  "nombre": "Auriculares prueba",
+  "descripcion": "Auriculares Bluetooth",
+  "precio": 120.0
+}
+
+### Actualizar un producto (PUT)
+PUT http://localhost:5100/api/productos/2
+Content-Type: application/json
+
+{
+  "nombre": "Mouse",
+  "descripcion": "Mouse Alambrico",
+  "precio": 160.0
+}
+
+### Eliminar un producto (DELETE)
+DELETE http://localhost:5100/api/productos/4
