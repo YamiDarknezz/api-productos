@@ -19,7 +19,7 @@ WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 
 # Puerto que expone tu app Spring Boot (ajusta si usas otro)
-EXPOSE 8080
+EXPOSE 5100
 
 # Ejecutar la app
 ENTRYPOINT ["java", "-jar", "app.jar"]
