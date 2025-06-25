@@ -3,6 +3,8 @@ package com.darkhub.api.api_productos.controlador;
 import com.darkhub.api.api_productos.modelo.Producto;
 import com.darkhub.api.api_productos.servicio.ProductoServicio;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -40,5 +42,10 @@ public class ProductoControlador {
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Long id) {
         servicio.eliminar(id);
+    }
+
+    @GetMapping("/paginado")
+    public Page<Producto> obtenerPaginado(Pageable pageable) {
+        return servicio.listarPaginado(pageable);
     }
 }

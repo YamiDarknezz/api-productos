@@ -1,5 +1,5 @@
 ### Listar todos los productos (GET)
-GET https://5100.darkhub.lat/api/productos
+GET https://api.ecoalerta.lat/api/productos
 Accept: application/json
 
 ### Obtener un producto por ID (GET)
@@ -11,8 +11,8 @@ POST http://localhost:5100/api/productos
 Content-Type: application/json
 
 {
-  "nombre": "Auriculares",
-  "descripcion": "Auriculares Bluetooth",
+  "nombre": "Parlantes Sony",
+  "descripcion": "Parlantes Estereo",
   "precio": 120.0
 }
 
@@ -38,3 +38,8 @@ Content-Type: application/json
 
 ### Eliminar un producto (DELETE)
 DELETE http://localhost:5100/api/productos/4
+
+
+### Listar Paginado
+GET http://localhost:5100/api/productos/paginado?page=1&size=2&sort=precio,desc
+Accept: application/json

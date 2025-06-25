@@ -3,6 +3,8 @@ package com.darkhub.api.api_productos.servicio;
 import com.darkhub.api.api_productos.modelo.Producto;
 import com.darkhub.api.api_productos.repositorio.ProductoRepositorio;
 import com.darkhub.api.api_productos.excepcion.RecursoNoEncontradoExcepcion;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import org.springframework.stereotype.Service;
 
@@ -42,5 +44,9 @@ public class ProductoServicio {
     public void eliminar(Long id) {
         Producto producto = obtenerPorId(id);
         repositorio.delete(producto);
+    }
+
+    public Page<Producto> listarPaginado(Pageable pageable) {
+        return repositorio.findAll(pageable);
     }
 }
