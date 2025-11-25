@@ -7,7 +7,7 @@ WORKDIR /app
 COPY pom.xml .
 COPY src ./src
 
-# Construir el proyecto (ajusta -DskipTests si necesitas ejecutar tests)
+# Construir el proyecto
 RUN mvn clean package -DskipTests
 
 # Etapa de runtime con JRE 21 minimal
@@ -18,8 +18,12 @@ WORKDIR /app
 # Copiar el jar generado de la etapa build
 COPY --from=build /app/target/*.jar app.jar
 
-# Puerto por defecto que usa Spring Boot (se puede sobreescribir con una variable)
-EXPOSE 5100
+# Variables de entorno por defecto
+ENV SPRING_PROFILES_ACTIVE=dev
+ENV SERVER_PORT=5051
 
-# Ejecutar Spring Boot con paso de variables si es necesario
-ENTRYPOINT ["sh", "-c", "java -jar app.jar --server.port=${SERVER_PORT:-5100}"]
+# Puerto expuesto
+EXPOSE ${SERVER_PORT}
+
+# Ejecutar Spring Boot
+ENTRYPOINT ["sh", "-c", "java -jar app.jar"]

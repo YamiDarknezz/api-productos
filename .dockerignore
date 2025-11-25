@@ -1,0 +1,37 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDEs
+.idea
+.vscode
+*.iml
+*.ipr
+*.iws
+
+# Build artifacts
+target/
+build/
+*.class
+
+# Environment files
+.env
+.env.local
+
+# Documentation
+README.md
+HELP.md
+
+# Tests
+src/test/
+
+# Maven wrapper (already in image)
+.mvn/
+mvnw
+mvnw.cmd
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore

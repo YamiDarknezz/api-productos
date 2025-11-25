@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  # Base de datos PostgreSQL
+  postgres:
+    image: postgres:16-alpine
+    container_name: api-productos-db
+    environment:
+      POSTGRES_DB: gestor_proyectos
+      POSTGRES_USER: yamidarknezz
+      POSTGRES_PASSWORD: OrangePi5PR@
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U yamidarknezz"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Aplicación Spring Boot
+  app:
+    build: .
+    container_name: api-productos-app
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SERVER_PORT: 5051
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: gestor_proyectos
+      DB_USER: yamidarknezz
+      DB_PASSWORD: OrangePi5PR@
+    ports:
+      - "5051:5051"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
+    driver: bridge
