@@ -1,20 +1,13 @@
-services:
-  # Base de datos PostgreSQL
-  - type: pserv
-    name: api-productos-db
-    env: docker
+databases:
+  - name: api-productos-db
+    databaseName: gestor_proyectos
     plan: free
-    region: oregon
-    databases:
-      - name: gestor_proyectos
-        user: api_user
 
-  # Aplicación Spring Boot
+services:
   - type: web
     name: api-productos
-    env: docker
+    runtime: docker
     plan: free
-    region: oregon
     healthCheckPath: /actuator/health
     envVars:
       - key: SPRING_PROFILES_ACTIVE
@@ -30,7 +23,9 @@ services:
           name: api-productos-db
           property: port
       - key: DB_NAME
-        value: gestor_proyectos
+        fromDatabase:
+          name: api-productos-db
+          property: database
       - key: DB_USER
         fromDatabase:
           name: api-productos-db
